@@ -1,0 +1,55 @@
+<div class="form-container">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
+    <h2>Sign Up</h2>
+
+    <div>
+      <label for="name">Name:</label>
+      <input id="name" type="text" formControlName="name" />
+
+      @if (name?.invalid && (name?.dirty || name?.touched)) {
+        <div class="error">
+          @if (name?.hasError('required')) {
+            <div>Name is required.</div>
+          }
+          @if (name?.hasError('minlength')) {
+            <div>Name must be at least 3 characters.</div>
+          }
+          @if (name?.hasError('maxlength')) {
+            <div>Name must be less than 10 characters.</div>
+          }
+        </div>
+      }
+    </div>
+
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" type="email" formControlName="email" />
+
+      @if (email?.invalid && (email?.dirty || email?.touched)) {
+        <div class="error">
+          @if (email?.hasError('required')) {
+            <div>Email is required.</div>
+          }
+          @if (email?.hasError('email')) {
+            <div>Email format is invalid.</div>
+          }
+        </div>
+      }
+    </div>
+
+    <div>
+      <label for="phone">Phone:</label>
+      <input id="phone" type="tel" formControlName="phone" />
+
+      @if (phone?.invalid && (phone?.dirty || phone?.touched)) {
+        <div class="error">
+          @if (phone?.hasError('required')) {
+            <div>Phone is required.</div>
+          }
+        </div>
+      }
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
