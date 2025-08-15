@@ -1,0 +1,14 @@
+<h2>Posts</h2>
+
+@if (isLoading) {
+  <div>Loading...</div>
+} @else {
+  <ul>
+    @for (post of posts; track post.id) {
+      <li>
+        <strong>{{ post.title }}</strong>
+        <p>{{ post.body }}</p>
+      </li>
+    }
+  </ul>
+}
