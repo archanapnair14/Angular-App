@@ -1,0 +1,93 @@
+<div class="p-m-4">
+  <h2>Product Management</h2>
+
+  <button pButton label="Add Product" (click)="openNew()" class="p-button-success mb-2"></button>
+
+  <p-table [value]="products" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>SKU</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.sku }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.category }}</td>
+        <td>
+          <div>
+          <button
+            pButton
+            type="button"
+            label="View"
+            icon="pi pi-eye"
+            [routerLink]="['/product-detail', product._id]">
+          </button>
+          <!-- <button
+            pButton
+            type="button"
+            label="View"
+            icon="pi pi-eye"
+            (click)="viewProduct(product._id)">
+          </button> -->
+          <button  pButton icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                  (click)="editProduct(product)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                  (click)="deleteProduct(product._id!)"></button>
+        </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <!-- Dialog -->
+  <p-dialog header="{{ isEdit ? 'Edit' : 'Add' }} Product" [(visible)]="productDialog" [modal]="true" [closable]="false">
+    <div class="p-fluid">
+      <div class="p-field">
+        <div>       
+           <input class="product" placeholder="Name" pInputText [(ngModel)]="product.name" />
+       </div>
+      </div>
+      <div class="p-field">
+        <div>
+        <input pInputText placeholder="Stock Keeping Unit" [(ngModel)]="product.sku" />
+        </div>
+      </div>
+      <div class="p-field">
+        <label>Quantity</label>
+        <div>
+        <input pInputText placeholder="Quantity" type="number" [(ngModel)]="product.quantity" />
+        </div>
+      </div>
+      <div class="p-field">
+        <label>Price</label>
+        <div>
+        <input pInputText placeholder="Price" type="number" [(ngModel)]="product.price" />
+        </div>
+      </div>
+      <div class="p-field">
+        <div>
+        <input pInputText placeholder="Category" [(ngModel)]="product.category" />
+        </div>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <button pButton label="Cancel" class="p-button-text" (click)="productDialog = false"></button>
+      <button pButton label="Save" (click)="saveProduct()" class="p-button-primary"></button>
+    </ng-template>
+  </p-dialog>
+</div>
+
+<div>
+   <p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>
+</div>

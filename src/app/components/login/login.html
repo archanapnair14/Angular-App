@@ -1,0 +1,31 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+    <div class="p-field">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        pInputText
+        [(ngModel)]="email"
+        name="email"
+        required
+      />
+    </div>
+
+    <div class="p-field">
+      <label for="password">Password</label>
+      <p-password
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+        toggleMask="true"
+      ></p-password>
+    </div>
+
+    <p-button label="Login" icon="pi pi-sign-in" type="submit"></p-button>
+
+    <p-message *ngIf="error" severity="error" text="{{ error }}"></p-message>
+  </form>
+</div>
